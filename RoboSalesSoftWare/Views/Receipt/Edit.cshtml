@@ -1,0 +1,38 @@
+﻿@using BLL.RoboMind.Resources
+@model BLL.RoboMind.DTO.ReceiptDto
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>@CommonRes.EditLabel</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ReceiptCode" class="control-label"></label>
+                <input asp-for="ReceiptCode" readonly class="form-control" />
+                <span asp-validation-for="ReceiptCode" class="text-danger"></span>
+            </div>
+      
+         
+            <div class="form-group">
+                <label asp-for="Total" class="control-label"></label>
+                <input asp-for="Total" class="form-control" />
+                <span asp-validation-for="Total" class="text-danger"></span>
+            </div>
+        
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-warning">@CommonRes.BackToListLabel</a>
+</div>
+

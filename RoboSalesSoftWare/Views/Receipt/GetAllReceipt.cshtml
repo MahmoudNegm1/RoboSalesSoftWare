@@ -1,0 +1,72 @@
+﻿@using BLL.RoboMind.DTO
+@using BLL.RoboMind.Resources
+@model SearchFromDateToDateDto
+@{
+    ViewData["Title"] = "GetAllReceipt";
+}
+
+<h1>GetAllReceipt</h1>
+<script src="/lib/jquery/dist/jquery.min.js"></script>
+
+<div class="col-sm-12">
+    <div data-role="collapsible" class="col-sm-6  p-5" id="divID">
+        @using (Html.BeginForm("GetAllReceipt", "Receipt", FormMethod.Get))
+        {
+
+            @*   <div class=" col-sm-4">
+        <label asp-for="FromDate" class="form-label mt-4"></label>
+        </div> *@
+            <div class="col-sm-6">
+
+                <label asp-for="FromDate" class="form-label"></label>
+                <input asp-for="FromDate" type="date" value="@DateTime.Now" placeholder="Choose Date" class="form-control" />
+                <span asp-validation-for="FromDate" class="text-danger"></span>
+            </div>
+            <div class="col-sm-6">
+
+                <label asp-for="ToDate" class="form-label"></label>
+                <input asp-for="ToDate" type="date" value="@DateTime.Now" placeholder="Choose Date" class="form-control" />
+                <span asp-validation-for="ToDate" class="text-danger"></span>
+            </div>
+
+            <input type="submit" value="Search" class="btn btn-primary m-4" />
+
+            <br>
+
+        }
+    </div>
+
+</div>
+
+<div class="card">
+    <div class="card-body">
+        Receipt  Income WithOut VAT :   <h5 class="card-title" id="ReceipetIncome">@Model.Total</h5>
+        <br /> Receipt  Income After VAT : <h5 class="card-title" id="sumDisplay">  </h5>
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        // Initialize the sum variable
+        var sum = 0;
+        var TotalBefore = 0;
+        var TotalAfter = 0;
+        // Iterate through each element with the class "tableitem"
+        // Get the text content of the associated "itemtext" element
+        var priceText = $(this).find("#ReceipetIncome").text();
+
+        // Parse the price as a float and add it to the sum
+        var price = parseFloat(priceText);
+        if (!isNaN(price)) {
+            sum += price;
+            TotalBefore = sum;
+        }
+
+        $("#sumDisplayBefore").text(" " + TotalBefore);
+
+        TotalAfter = sum + ((sum) * (5 / 100));
+        // Example: Set the sum in a HTML element
+        $("#sumDisplay").text(" " + TotalAfter);
+    });
+
+</script>

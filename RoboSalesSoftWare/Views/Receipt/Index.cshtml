@@ -1,0 +1,51 @@
+﻿@using BLL.RoboMind.DTO
+@using BLL.RoboMind.Resources
+@model IEnumerable<BLL.RoboMind.DTO.ReceiptDto>
+
+@{
+    ViewData["Title"] = "Index";
+    var tableData = TempData["TableData"] as List<ReceiptDto>;
+
+}
+
+<style > 
+    
+    div a{
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-bottom:15px
+    }
+
+    .card{margin:10px}
+</style>
+<p>
+    <h2> <center><a asp-action="Create" style="width:160px; height:70px; font-size:larger; " class="btn btn-primary">@CommonRes.CreateLabel</a> </center> </h2>
+</p>
+<div class="row">
+    @if (tableData != null && tableData.Any())
+    {    @foreach (var item in tableData)
+    {
+        <div class="col-md-4">
+                <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Receipt Code: @Html.DisplayFor(modelItem => item.ReceiptCode)</h5>
+@*                     <p class="card-text">Market Code: @Html.DisplayFor(modelItem => item.MarketCode)</p>
+ *@                    <p class="card-text">Total: @Html.DisplayFor(modelItem => item.Total)</p>
+                 @*    <p class="card-text">Creation Date: @Html.DisplayFor(modelItem => item.CreationDate)</p>
+                    <p class="card-text">Modification Date: @Html.DisplayFor(modelItem => item.ModificationDate)</p> *@
+
+                    <div class="btn-group" role="group" aria-label="Actions">
+@*                         <a class="btn btn-primary ml-2"  asp-action="Edit" asp-route-id="@item.ReceiptCode">@CommonRes.EditLabel</a>
+ *@                        <a class="btn btn-secondary ml-2" asp-action="Details" asp-route-id="@item.ReceiptCode">@CommonRes.DetailsLabel</a>
+                            <a class="btn btn-warning ml-2" asp-action="PrintReceipt" asp-route-ReceiptCode="@item.ReceiptCode">@CommonRes.printLabel</a>
+
+@*                         <a class="btn btn-danger ml-2" asp-action="Delete" asp-route-id="@item.ReceiptCode">@CommonRes.DeleteLabel</a>
+ *@                    </div>
+                </div>
+            </div>
+        </div>
+    }}
+ 
+    
+</div>
+

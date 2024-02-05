@@ -1,0 +1,188 @@
+﻿
+@{
+    Layout = null;
+}
+@using BLL.RoboMind.DTO
+@using BLL.RoboMind.Resources
+@model PrintInvoiceDataViewModel
+<html>
+<head>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/css/PrintStyle.css" />
+
+</head>
+
+<center>
+    <body >
+        <input type="button" style="height:80px; border-radius:5px;width:150px; background-color:#77AADA; font-size:30px;" onclick="printDiv('invoice-POS')" class="btn btn-primary" value="Print" />
+
+        <br />
+        <br />
+       
+        <a style="background-color:#D88D7C; border-radius:5px; font-size:30px;text-decoration:none" asp-action="Index" class="btn btn-primary" asp-controller="Home">@CommonRes.HomeLabel</a>
+
+        <div style="text-align:center" id="invoice-POS">
+            <center id="top">
+                <div class="logo">
+                </div>
+                <div class="info">
+                  
+                </div><!--End Info-->
+            
+            <div id="mid">
+                <div class="info">
+                    <h2>Contact Info</h2>
+                    <p>
+                        @if (Model != null && Model.MarketNavigation != null)
+                        {
+                                <h4>@CommonRes.MarketNameLabel </h4>
+                                <h2> @Model.MarketNavigation.ArabicName </h2>
+                        <p> Souq AlJuhail , sharjah - Al Dhaid Shop Number : @Model.MarketNavigation.ShopNumber   </p>
+                         
+                                @Model.MarketNavigation.MarketSerialCode
+                               <br />
+                              <p> Phone Number </p>  @Model.MarketNavigation.Telephone
+                            }
+
+                    </p>
+                </div>
+            </div>
+            </center><!--End Invoice Mid-->
+            <center><h1> TAX INVOICE </h1>
+                OrderDate: @if (@Model != null) { @Model.ReceiptDetailsNavigation.LastOrDefault().ReceiptNavigation.CreationDate; }
+               <br>  OrderSerial: @if (@Model != null)
+                {
+                    @Model.ReceiptDetailsNavigation.LastOrDefault().ReceiptNavigation.ReceiptCode ; @Model.MarketNavigation.Name
+                    ;
+                }
+
+            </center>
+            <div id="bot">
+                <center>
+                    <div id="table">
+                        <table>
+                            <tr>
+                                <td colspan="3"> ----------------------------------------------------------</td>
+                            </tr>
+                            <tr class="tabletitle">
+
+                                <td class="item"><h4>@CommonRes.TypesLabel</h4></td>
+                                @*                       <td class="Hours"><h4>@CommonRes.QuantityLabel</h2></td>
+                                *@
+                                <td class="Rate"><h4>@CommonRes.QuantityLabel</h4></td>
+
+                                <td class="Rate"><h4>@CommonRes.PriceLabel</h4></td>
+                                <td class="Rate"><h4>Amount  </h4></td>
+
+                            </tr>
+
+                            @if (Model != null)
+                            {
+                                foreach (var item in Model.ReceiptDetailsNavigation)
+
+                                {
+                                    <tr class="service">
+                                        <td class="tableitem"><p class="itemtext">@item.VegatablesTypeNavigation.Name</p></td>
+                                        <td class="tableitem"><p class="itemtext" id="Price111">@item.Quantity</p></td>
+
+                                        <td class="tableitem"><p class="itemtext" id="Price">@String.Format("{0:}", @item.Price * @item.Quantity)</p></td>
+                                            <td class="tableitem"><p class="itemtext">@String.Format("{0:}", @item.Price * @item.Quantity)</p></td>
+
+                                        @*                         <td class="tableitem"><p class="itemtext">$1500.00</p></td>
+                                *@
+                                    </tr>
+
+
+                                }
+                            }
+                            <tr>
+                                <td colspan="3"> -----------------------------------------------------------</td>
+                            </tr>
+
+                            <tr class="tabletitle">
+                                <td><h3>Total before Vat  &nbsp;&nbsp;&nbsp;&nbsp;</h3></td>
+                                <td> </td>
+                                <td><h3 id="sumDisplayBefore"></h3></td>
+                                <td><h3>AED</h3></td>
+                            </tr>
+
+                            <tr class="tabletitle">
+                                <td> <h2> Vat: </h2></td>
+                                <td> </td>
+
+                                <td><h3 class ="TaxForPill"></h3></td>
+                                <td class="payment"><h2></h2></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"> -----------------------------------------------------------</td>
+                            </tr>
+                            <tr class="tabletitle">
+                                <td><h3>Grand Total </h3></td>
+                                <td> </td>
+
+                                <td><h3 id="sumDisplay"></h3></td>
+                                <td><h3>AED</h3></td>
+                            </tr>
+                        </table>
+                    </div><!--End Table-->
+
+                    <div id="legalcopy">
+                        <p class="legal">
+                            <strong>Thank you for your Visit ! 
+                                @if (Model != null) { <br /> @Model.MarketNavigation.Name  }
+                                 <p> Always in Service </p></strong>
+                            <h2>
+                                Robomind System
+                            </h2>
+                        </p>
+                    </div>
+                </center>
+               
+            </div><!--End InvoiceBot-->
+        </div><!--End Invoice-->
+
+        <script>
+
+            $(document).ready(function () {
+                // Initialize the sum variable
+                var sum = 0;
+                var TotalBefore = 0;
+                var TotalAfter = 0;
+                // Iterate through each element with the class "tableitem"
+                $(".tableitem").each(function () {
+                    // Get the text content of the associated "itemtext" element
+                    var priceText = $(this).find("#Price").text();
+
+                    // Parse the price as a float and add it to the sum
+                    var price = parseFloat(priceText);
+                    if (!isNaN(price)) {
+                        sum += price;
+                        TotalBefore = sum;
+                    }
+                });
+                $("#sumDisplayBefore").text(" " + TotalBefore);
+                var tax = sum * (5 / 100);
+                $(".TaxForPill").text("" + tax.toFixed(2))
+                TotalAfter = sum + ((sum) * (5 / 100));
+                // Example: Set the sum in a HTML element
+                $("#sumDisplay").text(" " + TotalAfter);
+            });
+            function printDiv(divId) {
+
+                var prtContent = document.getElementById("invoice-POS");
+                var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+                WinPrint.document.write(prtContent.innerHTML);
+                WinPrint.document.close();
+                WinPrint.focus();
+                WinPrint.print();
+                WinPrint.close();
+            }
+
+        </script>
+    </body>
+</center>
+
+</html>
+
+
+

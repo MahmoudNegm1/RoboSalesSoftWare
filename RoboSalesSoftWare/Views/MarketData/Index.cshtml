@@ -1,0 +1,67 @@
+﻿@using BLL.RoboMind.Resources
+@model IEnumerable<BLL.RoboMind.DTO.MarketDataDto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">@CommonRes.CreateLabel</a>
+</p>
+<table class="table bg-light">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.MarketSerialCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArabicName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telephone)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.MarketSerialCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArabicName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telephone)
+            </td>
+           
+                <td>
+                    <div class="btn-group" role="group" aria-label="Actions">
+                        <a class="btn btn-primary ml-2" asp-action="Edit" asp-route-id="@item.MarketCode">@CommonRes.EditLabel</a>
+                        <a class="btn btn-secondary ml-2" asp-action="Details" asp-route-id="@item.MarketCode">@CommonRes.DetailsLabel</a>
+@*                         <a class="btn btn-danger ml-2" asp-action="Delete" asp-route-id="@item.MarketCode">@CommonRes.DeleteLabel</a>
+ *@                    </div>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

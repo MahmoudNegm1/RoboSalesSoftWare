@@ -1,0 +1,35 @@
+﻿@using BLL.RoboMind.Resources
+@model IEnumerable<BLL.RoboMind.DTO.ReceiptDetailsViewDto>
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>@CommonRes.DetailsLabel</h1>
+
+
+<p>
+    <a asp-action="Create">@CommonRes.CreateLabel</a>
+</p>
+
+<div class="card-deck">
+    @foreach (var item in Model)
+    {
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">@Html.DisplayFor(modelItem => item.ReceiptDetailsCode)</h5>
+                <p class="card-text">
+                    <strong>Vegatables Type:</strong> @Html.DisplayFor(modelItem => item.VegatablesTypeNavigation.Name)<br />
+                    <strong>Price:</strong> @Html.DisplayFor(modelItem => item.Price)<br />
+                    <strong>Receipt Code:</strong> @Html.DisplayFor(modelItem => item.ReceiptCode)
+                </p>
+            </div>
+            @*     <div class="card-footer">
+        @Html.ActionLink("Edit", "Edit", new { id = item.ReceiptDetailsCode }) |
+        @Html.ActionLink("Details", "Details", new { id = item.ReceiptDetailsCode }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.ReceiptDetailsCode })
+        </div> *@
+        </div>
+    }
+</div>
+

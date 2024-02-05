@@ -1,0 +1,204 @@
+﻿@using BLL.RoboMind.Resources
+@model BLL.RoboMind.DTO.ReceiptDto
+@{
+    ViewData["Title"] = "Create";
+}
+<h1>@CommonRes.CreateLabel</h1>
+<center> <input type="button" id="Save" style="width:160px; height:60px; font-size:larger; " value="Create" class="btn btn-primary" /></center>
+<style>
+    .card {
+        width: 200px; /* Set your desired width */
+        margin: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        cursor: pointer;
+        display: inline-flex
+    }
+    .card-img {
+        height: 150px; /* Set your desired height */
+        background-size: cover;
+        background-position: center;
+    }
+    .card-body {
+        padding: 10px;
+    }
+    .card-title {
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+    font-face {
+        font-family: 'Equestria';
+    }
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0px;
+        padding: 0px;
+        background-color: #794848
+    }
+    .details-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    .details-table th, .details-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    .details-table th {
+        background-color: #f2f2f2;
+    }
+</style>
+<hr />
+<div class="row ">
+    <div class="col-sm-8">
+        <form id="createForm" asp-action="Create">
+            <form id="searchForm">
+                <label for="vegetableSearch">Search Vegetables:</label>
+                <input type="text" id="vegetableSearch" onchange="filterVegetables()" />
+            </form>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="card-body overflow-scroll" style="max-height:500px; ">
+               
+                @if (Model != null)
+                
+                {
+                       @foreach (var item in Model.VegatablesType)
+                {
+                    <div class="card" onclick="showDetails('@item.Name','@item.TypeCode', '@item.Price' , '@item.Quantity')">
+                        <div class="card-img" style="background-image: url('@Url.Content("~/Assets/VegetablesIMG/" + item.Cover)');"></div>
+                        <div class="card-body">
+                            <h5 class="card-title" id="Name_{@item.TypeCode}">@item.Name</h5>
+                            <h5 class="card-title" id="Name_{@item.TypeCode}">@item.TypeCode</h5>
+                            <h5 class="card-title" id="Name_{@item.Price}">@item.Price</h5>
+                            <h5 class="card-title" id="Name_{@item.Quantity}">@item.Quantity</h5>
+                        </div>
+                    </div>
+                }
+                }
+             
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4 p-3">
+        <form>
+            <div id="detailsTable" class="col-sm-6">
+                <!-- Table will be displayed here -->
+            </div>
+            <tr class="tabletitle">
+                <td><h2>Total</h2></td>
+                <td>  <h2 id="sumDisplay"></h2></td>
+                <td><h2>AED</h2></td>
+            </tr>
+        </form>
+    </div>
+</div>
+ <div>
+    <div class="form-group">
+        <br /> 
+        <br /> 
+        <a asp-action="Index" class="btn btn-warning">@CommonRes.BackToListLabel</a>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).on('input', '.quantity, .price', function () {
+            var row = $(this).closest('tr');
+            var quantity = parseFloat(row.find('.quantity').val()) || 0;
+            var price = parseFloat(row.find('.price').val()) || 0;
+            var typePrice = quantity * price;
+            row.find('.Typeprice').val(typePrice);
+            updateSumDisplay();
+        });
+        function filterVegetables() {
+            var searchTerm = $('#vegetableSearch').val().toLowerCase();
+            $('.card').hide();
+            $('.card').filter(function () {
+                return $(this).text().toLowerCase().includes(searchTerm);
+            }).show();
+        }
+        $(document).on('click', '.deleteBtn', function () {
+            $(this).closest('tr').remove();
+            updateSumDisplay();
+        });
+        var sum =0; 
+        function showDetails(name, typeCode, price , quantity) {
+         var priceFloat= parseFloat(price);
+            sum = sum + priceFloat;
+            $("#sumDisplay").text(" " + sum);
+            var newRow = "<tr><td class='name'>" + 
+            name + "</td><td><input type='number' class= 'quantity'style='width: 50px;' value='" +
+            quantity + "' id='editedPrice'></td><td><input style='display: none;' class='typeCode' type='number' readonly value='" + 
+            typeCode + "' id='editedPrice'></td><td><input class='price' style='width: 70px;' type='number' value='" + 
+            price + "'><td><input class='Typeprice' style='width: 70px;' type='number' value='" + price 
+            + "'></td><td><button class='btn btn-danger btn-sm deleteBtn'>Delete</button></td></tr>";
+            var detailsTable = document.getElementById("detailsTable");
+            if (detailsTable) {
+                if (detailsTable.innerHTML.includes('<tbody>')) {
+                    var tbody = detailsTable.querySelector("tbody");
+                    tbody.innerHTML += newRow;
+                } else {
+                    detailsTable.innerHTML = "<h4>Details</h4><table class='table details-table'><thead><tr><th>Name</th> <th>Qyntity</th> <th > <th style='Display:None;' > TypeCode</th> </th><th>Price</th> <th> Total Price </th></tr></thead><tbody>" + newRow + "</tbody></table>";
+                }
+            } else {
+                console.error("Element with ID 'detailsTable' not found.");
+            }
+        }
+        var sum = 0;
+        $(document).on('click', '.deleteBtn', function () {
+            $(this).closest('tr').remove();
+            updateSumDisplay();
+        });
+        function updateSumDisplay() {
+            var newSum = 0;
+            $("#detailsTable table tbody tr").each(function () {
+                var quantity = parseFloat($(this).find('.quantity').val()) || 0;
+                var price = parseFloat($(this).find('.price').val()) || 0;
+                newSum += quantity * price;
+            });
+            sum = newSum;
+            $("#sumDisplay").text(" " + sum);
+        }
+        $(document).ready(function () {
+            var price = 0;
+            var sum = 0;
+            $("#Save").click(function (event) {
+                // Prevent the default form submission
+                event.preventDefault();
+                // Get the data from the table cells
+                var tableData = [];
+                $("#detailsTable table tbody tr").each(function () {
+                    var price1 = $(this).find(".price").val().replace('٫', '.');
+                    var name = $(this).find(".name").text();
+                    var TypeCode = $(this).find(".typeCode").val();
+                    var quantity = $(this).find(".quantity").val();
+                    var price = parseFloat(price1);
+                   sum = sum+price;
+                    $("#sumDisplay").text(" " + sum);
+                    tableData.push({ typeCode: TypeCode, Name: name, Price: price, Quantity: quantity });
+                });
+                $.ajax({
+                    url: '@Url.Action("SaveReceipt", "Receipt")',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(tableData),
+                    success: function (result) {
+                        if (result) {
+                            window.location.href = '@Url.Action("PrintInvoice", "Receipt")';
+                        } else {
+                            console.error('Unexpected response from the server:', result);
+                        }
+                    },
+                    error: function (error) {
+                        console.error('Error during AJAX request:', error);
+                    }
+                });
+            });
+        });
+    </script>
+}

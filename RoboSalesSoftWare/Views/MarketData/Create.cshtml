@@ -1,0 +1,60 @@
+﻿@using BLL.RoboMind.Resources
+@model BLL.RoboMind.DTO.MarketDataDto
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>@CommonRes.CreateLabel</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+       @*      <div class="form-group">
+                <label asp-for="MarketCode" class="control-label"></label>
+                <input asp-for="MarketCode" class="form-control" />
+                <span asp-validation-for="MarketCode" class="text-danger"></span>
+            </div> *@
+
+            <div class="form-group">
+                <label asp-for="MarketSerialCode" class="control-label"></label>
+                <input asp-for="MarketSerialCode" class="form-control" />
+                <span asp-validation-for="MarketSerialCode" class="text-danger"></span>
+            </div> <div class="form-group">
+                <label asp-for="ShopNumber" class="control-label"></label>
+                <input asp-for="ShopNumber" class="form-control" />
+                <span asp-validation-for="ShopNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ArabicName" class="control-label"></label>
+                <input asp-for="ArabicName" class="form-control" />
+                <span asp-validation-for="ArabicName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telephone" class="control-label"></label>
+                <input asp-for="Telephone" class="form-control" />
+                <span asp-validation-for="Telephone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-warning">@CommonRes.BackToListLabel</a>
+</div>
+

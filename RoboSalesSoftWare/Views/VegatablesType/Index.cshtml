@@ -1,0 +1,51 @@
+﻿@using BLL.RoboMind.Resources
+@using Microsoft.AspNetCore.Hosting
+@model IEnumerable<BLL.RoboMind.DTO.VegatablesTypeViewDto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<script src="~/lib/jquery/jquery.min.js"></script>
+
+
+<style> 
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin: 10px;
+        width: 300px;
+    }
+</style>
+<p>
+   <h2> 
+        <a asp-action="Create" class="btn btn-primary">@CommonRes.CreateLabel</a>
+   </h2>
+</p>
+
+
+
+<div class="card-container">
+    @foreach (var item in Model)
+    {
+        <div class="card" style=" background-image: url('@Url.Content("~/Assets/VegetablesIMG/" + item.Cover)'); background-size: cover;">
+            <h3>@item.Name</h3>
+            <p>@CommonRes.SerialLabel: @item.TypeCode</p>
+            <p>@CommonRes.ArabicNamelabel: @item.Arabic_Name</p>
+            <p>@CommonRes.NameLabel: @item.Name</p>
+            <p>@CommonRes.PriceLabel: @item.Price</p>
+
+            <!-- Add more properties as needed -->
+            <div class="btn-group" role="group" aria-label="Actions">
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.TypeCode">@CommonRes.EditLabel</a>
+                @*                         <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.ReceiptCode">Details</a>
+            *@                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.TypeCode">@CommonRes.DeleteLabel</a>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,60 @@
+﻿@using BLL.RoboMind.Resources
+@model BLL.RoboMind.DTO.VegatablesTypeViewDto
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>@CommonRes.EditLabel</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TypeCode" class="control-label"></label>
+                <input asp-for="TypeCode" readonly  class="form-control" />
+                <span asp-validation-for="TypeCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Arabic_Name" class="control-label"></label>
+                <input asp-for="Arabic_Name" class="form-control" />
+                <span asp-validation-for="Arabic_Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cover" class="control-label"></label>
+                <input asp-for="Cover" type="file" class="form-control" />
+                <span asp-validation-for="Cover" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="display: none;">
+                <label asp-for="CreationDate" class="control-label"></label>
+                <input asp-for="CreationDate" class="form-control" />
+                <span asp-validation-for="CreationDate" class="text-danger"></span>
+            </div>
+         
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-warning">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

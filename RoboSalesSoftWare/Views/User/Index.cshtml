@@ -1,0 +1,48 @@
+﻿@using BLL.RoboMind.Resources
+@model IEnumerable<BLL.RoboMind.DTO.UserDto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PassWord)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PassWord)
+            </td>
+            <td>
+                @Html.ActionLink(CommonRes.EditLabel, "Edit", new {  id=item.UserCode }) |
+                @Html.ActionLink(CommonRes.DetailsLabel, "Details", new { id = item.UserCode }) |
+                @Html.ActionLink(CommonRes.DeleteLabel, "Delete", new { id = item.UserCode })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,163 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\Reports\ReportInvoice.rdlc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\Reports\ReportInvoice.rdlc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.Reporting" Version="2.1.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0" />
+    <PackageReference Include="NToastNotify" Version="8.0.0" />
+    <PackageReference Include="System.CodeDom" Version="8.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BLL.RoboMind\BLL.RoboMind.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Reports\" />
+    <Folder Include="wwwroot\Assets\VegetablesIMG\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\LogIn\css\.DS_Store" />
+    <None Include="wwwroot\LogIn\css\bootstrap\.DS_Store" />
+    <None Include="wwwroot\LogIn\css\bootstrap\mixins\.DS_Store" />
+    <None Include="wwwroot\LogIn\fonts\.DS_Store" />
+    <None Include="wwwroot\LogIn\images\.DS_Store" />
+    <None Include="wwwroot\LogIn\js\.DS_Store" />
+    <None Include="wwwroot\LogIn\js\bootstrap.min.js" />
+    <None Include="wwwroot\LogIn\js\jquery.min.js" />
+    <None Include="wwwroot\LogIn\js\main.js" />
+    <None Include="wwwroot\LogIn\js\popper.js" />
+    <None Include="wwwroot\LogIn\scss\.DS_Store" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\.DS_Store" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\bootstrap-grid.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\bootstrap-reboot.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\bootstrap.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_alert.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_background-variant.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_badge.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_border-radius.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_box-shadow.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_breakpoints.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_buttons.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_caret.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_clearfix.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_deprecate.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_float.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_forms.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_gradients.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_grid-framework.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_grid.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_hover.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_image.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_list-group.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_lists.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_nav-divider.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_pagination.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_reset-text.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_resize.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_screen-reader.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_size.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_table-row.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_text-emphasis.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_text-hide.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_text-truncate.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_transition.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\mixins\_visibility.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\utilities\_align.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\utilities\_background.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\utilities\_borders.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\utilities\_clearfix.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\utilities\_display.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\utilities\_embed.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\utilities\_flex.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\utilities\_float.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\utilities\_overflow.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\utilities\_position.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\utilities\_screenreaders.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\utilities\_shadows.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\utilities\_sizing.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\utilities\_spacing.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\utilities\_stretched-link.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\utilities\_text.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\utilities\_visibility.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\vendor\_rfs.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_alert.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_badge.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_breadcrumb.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_button-group.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_buttons.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_card.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_carousel.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_close.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_code.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_custom-forms.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_dropdown.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_forms.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_functions.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_grid.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_images.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_input-group.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_jumbotron.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_list-group.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_media.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_mixins.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_modal.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_nav.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_navbar.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_pagination.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_popover.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_print.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_progress.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_reboot.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_root.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_spinners.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_tables.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_toasts.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_tooltip.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_transitions.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_type.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_utilities.scss" />
+    <None Include="wwwroot\LogIn\scss\bootstrap\_variables.scss" />
+    <None Include="wwwroot\LogIn\scss\style.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ReportDataSet\InvoiceDataSet.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>InvoiceDataSet.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ReportDataSet\InvoiceDataSet.xsd">
+      <SubType>Designer</SubType>
+      <LastGenOutput>InvoiceDataSet.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+    </None>
+  </ItemGroup>
+
+</Project>
